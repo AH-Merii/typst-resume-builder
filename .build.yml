@@ -3,12 +3,12 @@ packages:
   - git
 
 secrets:
-  - 88cce185-d2ec-4573-9546-e33f36f79bbf
+  - Input Secret Here
 
 environment:
   # repo and user names on both sr.ht and github
-  REPO: typst-collection
-  USER: swaits
+  REPO: typst-resume-builder
+  USER: AH-Merii
 
 tasks:
   - fetch-all-branches: |
