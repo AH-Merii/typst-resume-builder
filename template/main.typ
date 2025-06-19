@@ -1,5 +1,5 @@
 // main.typ
-#import "@local/resume-builder:0.1.0": *
+#import "@local/resume-builder:0.2.0": *
 
 #show: resume.with(
   name: "AbdulHamid Merii",
@@ -14,32 +14,20 @@
   ),
 )
 
-// updated skills section  to be part ofa function
 #skills-section(
   (
     "Python", "Pandas", "Numpy", "Sklearn", "PyTorch", "TensorFlow", 
-    "PyTorch Geometric", "Hugging Face", "Node", "Biopython", "Plotly", "Streamlit",
-    "AWS", "Cloud Computing", "CI/CD", "Pytest", "Docker", "Make", 
+    "PyTorch Geometric", "Hugging Face", "PydanticAI", "Biopython", "Plotly", "Streamlit",
+    "AWS", "SageMaker","Cloud Computing", "CI/CD", "Pytest", "Docker", "Make",
     "Unit Testing", "Lambda", "OOP", "Linux", "Neovim", "Git", "Sed", "JQ", "Requests",
-    "Terraform", "ClearML", "MLOps", "DVC", "Jira", "GitHub Actions", "Jupyter", "Agile",
+    "Terraform", "ClearML", "MLOps", "DVC", "Jira", "GitHub Actions", "Jupyter", "marimo","Agile",
     "English", "Arabic"
   ),
-  font: "Helvetica",           // Different font
+  font: "Noto Sans",           // Different font
   size: 10pt,                  // Smaller size
-  weight: "regular",           // Lighter weight (instead of "light")
-  separator: "•",              // Bullet instead of pipe
-  separator-spacing: 0.15em,   // Much tighter spacing
+  separator-spacing: 0.2em,   // Much tighter spacing
+  justify: false
 )
-
-= Old Skills Section
-
-*Programming & ML:* Python, Pandas, Numpy, Sklearn, PyTorch, TensorFlow, PyTorch Geometric, Hugging Face, Node, Biopython, Plotly, Streamlit
-
-*Cloud & DevOps:* AWS, Cloud Computing, CI/CD, Pytest, Docker, Make, Unit Testing, Lambda, OOP, Linux, Neovim, Git, Sed, JQ, Requests
-
-*MLOps & Tools:* Terraform, ClearML, MLOps, DVC, Jira, GitHub Actions, Jupyter, Agile
-
-*Languages:* English, Arabic – All professional proficiency or above
 
 = Experience
 
@@ -79,11 +67,6 @@
   ]
 ]
 
-#company-heading("Pacific Marine Research Center", start: "July 2005", end: "August 2009", icon: image("icons/microscope.svg"))[
-  #job-heading("Research Assistant", location: "San Diego, California",
-    comment: [Contributed to 7 published studies. #footnote[Visit https://amirapatel.org/publications for full list of publications.]]
-  )[]
-]
 
 = Projects
 

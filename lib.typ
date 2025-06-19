@@ -1,1 +1,1 @@
-#import "src/resume.typ": cv, resume, company-heading, job-heading, school-heading, degree-heading
+#import "src/resume.typ": cv, resume, company-heading, job-heading, school-heading, degree-heading, skills-section
