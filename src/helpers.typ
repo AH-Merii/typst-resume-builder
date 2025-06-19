@@ -1,3 +1,4 @@
+// helpers.typ
 #import "constants.typ":*
 
 #let icon_and_contact(icon, content) = {
@@ -19,6 +20,7 @@
 
 #let make-icon-header(icon-tuples) = {
   // what we put between elements
+  // #h(distance of | from the right of the word)#sym.divides#h(distance of | from the left of the word)
   let icon-joiner = box(baseline: -0.15em, [#h(0.5em)#sym.divides#h(0.5em)])
 
   // map them into formatted content, and join

@@ -1,5 +1,5 @@
-// Constants
-#let SIZE_HUGE = 1.3em
+// constants.typp
+#let SIZE_HUGE = 2em
 #let SIZE_LARGE = 1.1em
 #let SIZE_NORMAL = 1em
 #let SIZE_SMALL = 0.9em
@@ -10,7 +10,7 @@
 #let BODY_WEIGHT = "light"
 #let HEADING_FONT = "Libertinus Serif"
 
-#let PAGE_MARGIN = 0.5in
+#let PAGE_MARGIN = 0.3in
 
 #let HEADER_SIZE = SIZE_SMALL
 #let HEADER_ICON_HEIGHT = SIZE_NORMAL
@@ -21,7 +21,9 @@
 
 #let HEADLINE_NAME_SIZE = SIZE_HUGE
 #let HEADLINE_NAME_WEIGHT = "black"
+#let HEADLINE_NAME_COLOR = fuchsia
 #let HEADLINE_HRULE_STROKE = 1pt + black
+#let HEADLINE_ICON_SPACING = 0.5em
 
 #let TAGLINE_SIZE = SIZE_NORMAL
 #let TAGLINE_STYLE = "italic"
@@ -54,4 +56,4 @@
 #let TABLE_ZEBRA_COLOR_0 = green.lighten(85%)
 #let TABLE_ZEBRA_COLOR_1 = green.lighten(95%)
 
-#let HRULE_HEIGHT = 0.5em
+#let HRULE_HEIGHT = 0.25em

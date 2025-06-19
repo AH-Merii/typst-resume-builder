@@ -1,3 +1,4 @@
+// resume.typ
 #import "constants.typ": *
 #import "helpers.typ": *
 #import "state.typ": __get, __set
@@ -6,6 +7,8 @@
 #let resume(
   name: "YOUR NAME HERE",
   tagline: none,
+  profile-img-path: none,  // optional profile pic for the header
+  linkedin: none, // optional linkedin url
   paper: "us-letter",
   heading-font: HEADING_FONT,
   body-font: BODY_FONT,
@@ -66,7 +69,7 @@
   set par(justify: true)
 
   // Heading styles
-  set heading(numbering: "I.A.")
+  set heading(numbering: none)
   show heading.where(level: 1): it => {
     block(
       above: SECTION_HEADING_SPACE_ABOVE,
@@ -74,7 +77,11 @@
       breakable: false,
       [
         #text(size: SECTION_HEADING_SIZE, weight: SECTION_HEADING_WEIGHT, font: heading-font)[
-          #context counter(heading).display()
+          #context {
+          if heading.numbering != none {
+            counter(heading).display()
+          }
+        }
           #upper(it.body)
         ]
         #hrule(stroke: SECTION_HEADING_HRULE_STROKE)
@@ -99,10 +106,34 @@
   // Save our settings needed in other functions
   __set("heading-font", heading-font)
 
-  // Main Headline
-  text(size: HEADLINE_NAME_SIZE, weight: HEADLINE_NAME_WEIGHT, font: heading-font)[#smallcaps(name)]
-  h(1fr)
-  text(size: TAGLINE_SIZE, style: TAGLINE_STYLE, weight: TAGLINE_WEIGHT)[#tagline]
+  // Main Headline with optional icon
+  let icon_spacing = if profile-img-path != none { HEADLINE_ICON_SPACING } else { 0em }
+  
+  grid(
+    columns: (auto, auto, 2fr),
+    column-gutter: (icon_spacing, 0.5em),
+    align: (left + horizon, left + bottom, right + bottom),
+    
+    // first column, optional icon
+    if profile-img-path != none {
+      block(
+        clip: true,
+        radius: HEADLINE_NAME_SIZE / 2,
+        width: HEADLINE_NAME_SIZE,
+        height: HEADLINE_NAME_SIZE,
+        image(profile-img-path, fit: "cover", width: HEADLINE_NAME_SIZE, height: HEADLINE_NAME_SIZE)
+      )
+    },
+    
+    // second column, name (with optional link)
+    {
+      let headline_text = text(size: HEADLINE_NAME_SIZE, weight: HEADLINE_NAME_WEIGHT, font: heading-font, fill: HEADLINE_NAME_COLOR)[#smallcaps(name)]
+      if linkedin != none { link(linkedin, headline_text) } else { headline_text }
+    },
+    
+    // third column, tagline
+    text(size: TAGLINE_SIZE, style: TAGLINE_STYLE, weight: TAGLINE_WEIGHT)[#tagline]
+  )  
   hrule(stroke: HEADLINE_HRULE_STROKE)
 
   // The rest of the content
@@ -111,6 +142,42 @@
 
 // Alias resume to cv for non-Americans
 #let cv = resume
+
+// Creates a skills section with customizable separator and spacing between skills
+// Output: Python | AWS | Docker | Git | Linux (formatted across page width)
+#let skills-section(
+  skills,
+  font: BODY_FONT,
+  size: BODY_SIZE,
+  weight: BODY_WEIGHT,
+  separator: sym.divides, // defaults to | as a separator
+  separator-spacing: 0.5em,
+  line-spacing: 0.8em,  // Space between lines of skills
+  word-spacing: 0.05em,  // Additional spacing between words for better fill
+  justify: true,
+) = {
+  // Create the section header
+  heading(level: 1)[Skills]
+  
+  // Create the separator with custom spacing and styling
+  let sep = box(
+    baseline: -0.15em,  // Align with text baseline
+    [#h(separator-spacing)#separator#h(separator-spacing)]
+  )
+  
+  // Format skills with better text flow
+  block(
+    spacing: line-spacing,
+    text(font: font, size: size, weight: weight)[
+      #set par(
+        justify: justify,  // Fill width
+        leading: line-spacing,  // Line height
+        spacing: word-spacing,  // Word spacing
+      )
+      #skills.join(sep)
+    ]
+  )
+}
 
 #let company-heading(name, start: none, end: none, icon: none, body) = {
   let icon_spacing = if icon != none { COMPANY_ICON_SPACING } else { 0em }
@@ -160,6 +227,7 @@
     )
   )
 }
+
 
 // Alias to school heading
 #let school-heading = company-heading

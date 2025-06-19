@@ -1,3 +1,4 @@
+// state.typ
 #let __settings = state("__cv_settings", (:))
 
 #let __set(key, value) = {

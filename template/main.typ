@@ -1,60 +1,81 @@
-#import "@preview/finely-crafted-cv:0.3.0": *
+// main.typ
+#import "@local/resume-builder:0.1.0": *
 
 #show: resume.with(
-  name: "Amira Patel",
-  tagline: "Innovative marine biologist with 15+ years of experience in ocean conservation and research.",
-  keywords: "marine biology, conservation, research, education, patents",
+  name: "AbdulHamid Merii",
+  profile-img-path: "../template/assets/profile_pic.jpg",
+  tagline: "Senior ML Engineer; expertise in MLOps, cloud infra, & E2E ML pipelines.",
+  keywords: "machine learning, MLOps, AWS, Python, DevOps",
   icon-contact-header: (
-    (image("icons/email.svg"),    link("mailto:amira.patel@oceandreams.org", "amira.patel@oceandreams.org")),
-    (image("icons/phone.svg"),    link("tel:+13055557890", "+1-305-555-7890")),
-    (image("icons/linkedin.svg"), link("https://www.linkedin.com/in/amirapatel/", "amirapatel")),
+    (image("icons/email.svg"),    link("mailto:ah_merii@outlook.com", "ah_merii@outlook.com")),
+    (image("icons/phone.svg"),    link("tel:+447864058889", "+44 (7) 864058889")),
+    (image("icons/github.svg"),   link("https://github.com/AH-Merii", "AH-Merii")),
+    (image("icons/earth.svg"), "London, UK"),
   ),
-  thumbnail: image("assets/my-qr-code.svg"),
 )
 
-= Research Philosophy
+// updated skills section  to be part ofa function
+#skills-section(
+  (
+    "Python", "Pandas", "Numpy", "Sklearn", "PyTorch", "TensorFlow", 
+    "PyTorch Geometric", "Hugging Face", "Node", "Biopython", "Plotly", "Streamlit",
+    "AWS", "Cloud Computing", "CI/CD", "Pytest", "Docker", "Make", 
+    "Unit Testing", "Lambda", "OOP", "Linux", "Neovim", "Git", "Sed", "JQ", "Requests",
+    "Terraform", "ClearML", "MLOps", "DVC", "Jira", "GitHub Actions", "Jupyter", "Agile",
+    "English", "Arabic"
+  ),
+  font: "Helvetica",           // Different font
+  size: 10pt,                  // Smaller size
+  weight: "regular",           // Lighter weight (instead of "light")
+  separator: "•",              // Bullet instead of pipe
+  separator-spacing: 0.15em,   // Much tighter spacing
+)
 
-My approach to marine biology is rooted in curiosity, collaboration, and
-conservation. I believe in conducting rigorous scientific research that not only
-advances our understanding of marine ecosystems but also informs policy
-decisions to protect our oceans. By fostering interdisciplinary partnerships and
-engaging with local communities, I strive to create impactful solutions that
-balance human needs with ecological preservation.
+= Old Skills Section
+
+*Programming & ML:* Python, Pandas, Numpy, Sklearn, PyTorch, TensorFlow, PyTorch Geometric, Hugging Face, Node, Biopython, Plotly, Streamlit
+
+*Cloud & DevOps:* AWS, Cloud Computing, CI/CD, Pytest, Docker, Make, Unit Testing, Lambda, OOP, Linux, Neovim, Git, Sed, JQ, Requests
+
+*MLOps & Tools:* Terraform, ClearML, MLOps, DVC, Jira, GitHub Actions, Jupyter, Agile
+
+*Languages:* English, Arabic – All professional proficiency or above
 
 = Experience
 
-#company-heading("Global Ocean Institute", start: "March 2018", end: "Present", icon: image("./icons/earth.svg"))[
-  #job-heading("Senior Marine Biologist", location: "Brisbane, Queensland, AU")[
-    - Leading a team of 12 researchers in a long-term study on coral reef
-      resilience in changing climates.
-    - Developed an AI-powered system for monitoring fish populations, increasing
-      data accuracy by 40%.
-    - Secured \$2.5M in research grants for the institute's sustainable fishing
-      practices initiative.
-    - Mentored 20+ graduate students, with 5 going on to publish in top-tier
-      scientific journals.
+#company-heading("Silence Therapeutics", start: "December 2022", end: "Present",  icon: image("icons/Silence.svg"))[
+  #job-heading("Senior Machine Learning Engineer", location: "London, UK")[
+    - Deployed ClearML MLOps Platform on AWS Fargate utilizing Terraform IaC. Configured SGs, IAM roles, VPCs, and proxies. Enabled ML practitioners to reproduce experiments, collaborate on projects, scale models resulting in a 10x increase in experiments.
+    - Led the development of ML projects/pipelines E2E, from identifying project requirements and partner dependencies to workload balancing, software implementation, engineering, testing, and configuring metrics, visualizations, and dashboards. (Up to 2x perf boost)
+    - Coordinated with DevOps team in developing, configuring, & testing the ClearML autoscaler, enabling on-demand, configurable compute resources that dynamically adapt & scale to multi-user loads. Decreased pipeline run-times from hours to under 15 mins.
+    - Continuous Integration/Deployment Pipeline Integration, pull requests, code reviews, load/stress testing, unit/integration/e2e testing.
+    - Supervising a PhD student's research on RNA encoding for enhanced ML predictions, in collaboration with the Rosalind Franklin Institute.
+    - Led strategic and technical guidance for bioinformaticians, statistical geneticists, data scientists on ML projects, doubling ML projects.
   ]
 ]
 
-#company-heading("OceanTech Solutions", start: "June 2014", end: "February 2018", icon: image("icons/whale.svg"))[
-  #job-heading("Research Scientist", location: "Baltimore, Maryland")[
-    - Pioneered use of autonomous underwater vehicles for deep-sea exploration,
-      discovering 3 new species.
-    - Collaborated with engineers to develop biodegradable sensors for ocean
-      pollution monitoring.
-    - Presented findings at 15+ international conferences, establishing the
-      company as a leader in marine tech.
+#company-heading("Silence Therapeutics", start: "April 2021", end: "December 2022", icon: image("icons/Silence.svg"))[
+  #job-heading("Machine Learning Engineer", location: "London, UK")[
+    - Directed the consolidation of dispersed historical company data from Excel to DVC, integrating key external databases such as NCBI and Ensembl. Focused on rigorous data cleaning, formatting, and structuring in third normal form enhancing quality and reliability.
+    - Data Version Control for efficient dataset sharing among bioinformaticians, enhancing reproducibility & traceability in research workflows.
+    - Introduced comprehensive SDLC & CI/CD practices GH Actions, transitioning the team to structured, high-quality software development.
+    - Led collaboration with bioinformaticians to establish data/ML pipelines for siRNA activity, improving gene silencing research efficiency.
+    - Standardized Python project setups with Cookiecutter templates and streamlined deployments across environments using Terraform.
+    - Designed custom ML project evaluation metrics & visualization library with Plotly, enhancing insights & consistency for bioinformaticians.
   ]
 ]
 
-#company-heading("Coral Conservation Alliance", start: "September 2009", end: "May 2014", icon: image("icons/coral.svg"))[
-  #job-heading("Conservation Biologist", location: "Corpus Christi, Texas")[
-    - Managed a team of 8 in implementing coral restoration techniques across 5
-      Caribbean sites.
-    - Increased local community engagement in conservation efforts by 200%
-      through education programs.
-    - Co-authored a policy brief that influenced the establishment of 3 new
-      marine protected areas.
+#company-heading("Khatib & Alami", start: "August 2020", end: "April 2021", icon: image("icons/KA.svg"))[
+  #job-heading("Data Scientist", location: "Beirut, Lebanon")[
+    - Trained Satellite Imagery Multi-Temporal Change Detection and Segmentation Model using SpaceNet 7 Dataset.
+    - Managed labeling of Building Construction Dataset; trained, and deployed Building Construction Segmentation POC.
+    - Created Data Pipeline for Satellite Imagery Segmentation for Road Network Classification and Building Footprint Segmentation using Solaris and PyTorch.
+    - Trained an Arabic OCR classifier used for digital archiving using Google Tesseract, to be used on over 100,000 documents.
+  ]
+]
+
+#company-heading("ArabiaGIS", start: "June 2019", end: "August 2020", icon: image("icons/AGIS.svg"))[
+  #job-heading("Junior Data Scientist", location: "Beirut, Lebanon")[
   ]
 ]
 
@@ -64,30 +85,21 @@ balance human needs with ecological preservation.
   )[]
 ]
 
-= Patents
+= Projects
 
-#link(
-  "https://patents.google.com/patent/US20230123456A1",
-  strong("MARINE BIODIVERSITY MONITORING SYSTEM USING ENVIRONMENTAL DNA (US 20230123456A1)")
-)
-#quote[A novel system and method for monitoring marine biodiversity using
-environmental DNA (eDNA) sampling and analysis. The invention includes an
-automated collection device capable of filtering seawater at various depths,
-preserving eDNA samples, and transmitting data in real-time.]
+*Audio File Summarization:* Utilized Amazon Bedrock, deployed to AWS Lambda for scalable automation, event-driven operations.
 
-= Eligibility and Location
+*Protein Function Prediction using GNNs:* Utilized 3D protein data from PDB and trained GNN achieving an fmax score 0.6.
 
-- *Eligibility:* United States Permanent Resident
-- *Location:* Open to remote opportunities or relocation to coastal areas.
-- *Travel Availability:* Willing to travel up to 40% for field research and
-  conferences.
+*Supercharge My Shell (SMS):* Developed lightweight portable development environment, supports WSL2, Debian & Arch.
 
 = Education
 
-#school-heading("University of California, San Diego", start: "Fall 2001", end: "Spring 2005", icon: image("icons/graduation-cap.svg"))[
-  #degree-heading("Ph.D. in Marine Biology")[]
+#school-heading("University of Leeds", start: "2017", end: "2018")[
+  #degree-heading("Masters in Robotics & Mechatronics", location: "Leeds, UK")[]
 ]
 
-#school-heading("University of Miami", start: "Fall 1997", end: "Spring 2001", icon: image("icons/palm-tree.svg"))[
-  #degree-heading("B.S. in Marine Science, Minor in Environmental Policy")[]
+#school-heading("American University of Sharjah", start: "2013", end: "2016")[
+  #degree-heading("BSc in Mechanical Engineering", location: "Sharjah, UAE")[]
 ]
+
