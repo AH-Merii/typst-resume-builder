@@ -1,14 +1,24 @@
 // constants.typp
-#let SIZE_HUGE = 2em
-#let SIZE_LARGE = 1.1em
-#let SIZE_NORMAL = 1em
-#let SIZE_SMALL = 0.9em
-#let SIZE_TINY = 0.7em
+#let SIZE_HUGE = 25pt
+#let SIZE_LARGE = 15pt
+#let SIZE_NORMAL = 10pt
+#let SIZE_SMALL = 7.85pt
+#let SIZE_TINY = 5pt
 
-#let BODY_FONT = "Libertinus Serif"
-#let BODY_SIZE = 11pt
-#let BODY_WEIGHT = "light"
-#let HEADING_FONT = "Libertinus Serif"
+#let HEADING_FONT = "libertinus serif"
+
+#let BODY_FONT = "Lato"
+#let BODY_SIZE = 9pt
+#let BODY_WEIGHT = "regular"
+
+#let SKILLS_FONT = "Noto Sans"
+#let SKILLS_SIZE = SIZE_SMALL
+#let SKILLS_WEIGHT = "light"
+#let SKILLS_SEPARATOR = sym.divides
+#let SKILLS_SEPARATOR_SPACING = 0.45em
+#let SKILLS_LINE_SPACING = 0.8em
+#let SKILLS_WORD_SPACING = 0.05em
+#let SKILLS_JUSTIFY = true
 
 #let PAGE_MARGIN = 0.3in
 
@@ -19,17 +29,18 @@
 #let FOOTER_SIZE = SIZE_TINY
 #let FOOTER_TEXT_WEIGHT = "thin"
 
+#let HEADLINE_ICON_SPACING = 0.5em
+#let HEADLINE_ICON_SIZE = SIZE_HUGE
 #let HEADLINE_NAME_SIZE = SIZE_HUGE
 #let HEADLINE_NAME_WEIGHT = "black"
-#let HEADLINE_NAME_COLOR = fuchsia
+#let HEADLINE_NAME_COLOR = rgb("#1E7590")
 #let HEADLINE_HRULE_STROKE = 1pt + black
-#let HEADLINE_ICON_SPACING = 0.5em
 
 #let TAGLINE_SIZE = SIZE_NORMAL
 #let TAGLINE_STYLE = "italic"
 #let TAGLINE_WEIGHT = "regular"
 
-#let SECTION_HEADING_SIZE = 0.7em // TODO: this seems wrong, should be SIZE_NORMAL (etc)
+#let SECTION_HEADING_SIZE = SIZE_LARGE
 #let SECTION_HEADING_WEIGHT = "bold"
 #let SECTION_HEADING_HRULE_STROKE = 0.75pt + black.lighten(25%)
 #let SECTION_HEADING_SPACE_ABOVE = 1em
@@ -37,23 +48,31 @@
 
 #let COMPANY_ICON_SIZE = SIZE_NORMAL
 #let COMPANY_ICON_SPACING = 0.25em
-#let COMPANY_NAME_SIZE = SIZE_LARGE
+#let COMPANY_NAME_SIZE = 12pt
 #let COMPANY_NAME_WEIGHT = "bold"
 #let COMPANY_DATE_SIZE = COMPANY_NAME_SIZE
 #let COMPANY_DATE_WEIGHT = "bold"
-#let COMPANY_BLOCK_BELOW = 1.3em
+#let COMPANY_BLOCK_BELOW = 1em
 
 #let JOB_NAME_SIZE = SIZE_NORMAL
 #let JOB_NAME_STYLE = "normal"
 #let JOB_NAME_WEIGHT = "medium"
-#let JOB_LOCATION_SIZE = SIZE_SMALL
+#let JOB_LOCATION_SIZE = SIZE_NORMAL
 #let JOB_LOCATION_STYLE = JOB_NAME_STYLE
 #let JOB_LOCATION_WEIGHT = "light"
 #let JOB_BLOCK_ABOVE = 0.6em
 #let JOB_BLOCK_BELOW = 1em
 
-#let TABLE_HEADER_COLOR = blue.lighten(60%)
-#let TABLE_ZEBRA_COLOR_0 = green.lighten(85%)
-#let TABLE_ZEBRA_COLOR_1 = green.lighten(95%)
+// Bullet List / Body Content Constants
+#let BULLET_LIST_FONT = BODY_FONT
+#let BULLET_LIST_SIZE = BODY_SIZE
+#let BULLET_LIST_WEIGHT = BODY_WEIGHT
+#let BULLET_LIST_MARKER = sym.bullet  // or "-", "•", sym.diamond.filled
+#let BULLET_LIST_MARKER_COLOR = rgb("#1E7590")
+#let BULLET_LIST_INDENT = 0.2em
+#let BULLET_LIST_BODY_INDENT = 0.2em
+#let BULLET_LIST_LINE_SPACING = 1em  // Line height between 2 bullets
+#let BULLET_LIST_WORD_SPACING = 100%  // Space between words
+#let BULLET_LIST_WRAPPED_LINE_SPACING = 0.35em // Line height within the same bullet
 
 #let HRULE_HEIGHT = 0.25em

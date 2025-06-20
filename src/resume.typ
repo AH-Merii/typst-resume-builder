@@ -15,7 +15,14 @@
   body-size: BODY_SIZE,
   icon-contact-header: none,
   keywords: "",
-  thumbnail: none, // check out https://qrframe.kylezhe.ng/ for QR code generation
+  // QR codes with optional links
+  // Format: 
+  //   - Single: image("qr.png") or (image: image("qr.png"), link: "https://example.com")
+  //   - Multiple: ((image: image("qr1.png"), link: "https://example1.com"), 
+  //                (image: image("qr2.png"), link: "https://example2.com"))
+  qr-codes: none, // check out https://qrframe.kylezhe.ng/ for QR code generation
+  qr-spacing: 0.1in,  // Space between QR codes
+  qr-height: 0.5in,   // Height of each QR code
   body
 ) = {
   // Document setup, mostly metadata in a PDF
@@ -29,6 +36,7 @@
   set page(
     paper: paper,
     margin: PAGE_MARGIN,
+    header-ascent: -30%,
     numbering: "1 / 1",
     header: context {
       if here().page() == 1 and icon-contact-header != none {
@@ -53,9 +61,47 @@
           [Last updated: #date],
           // center column
           if multi_page { counter(page).display(both: true, "1 of 1") },
-          // right column
-          if thumbnail != none {
-            move(dy: -0.25in, box(height: 0.5in, thumbnail))
+          // right column - UPDATED to handle multiple QR codes
+          if qr-codes != none {
+            move(dy: -0.38in, {
+              // Helper function to render a single QR code
+              let render-qr = (qr-item) => {
+                let qr-content = none
+                let qr-link = none
+                
+                // Handle different input formats
+                if type(qr-item) == dictionary {
+                  qr-content = qr-item.at("image", default: none)
+                  qr-link = qr-item.at("link", default: none)
+                } else {
+                  // Assume it's just an image
+                  qr-content = qr-item
+                }
+                
+                if qr-content != none {
+                  let qr-box = box(height: qr-height, qr-content)
+                  if qr-link != none {
+                    link(qr-link, qr-box)
+                  } else {
+                    qr-box
+                  }
+                }
+              }
+              
+              // Check if qr-codes is an array or single item
+              if type(qr-codes) == array {
+                // Multiple QR codes
+                grid(
+                  columns: qr-codes.len(),
+                  column-gutter: qr-spacing,
+                  align: horizon,
+                  ..qr-codes.map(qr => render-qr(qr))
+                )
+              } else {
+                // Single QR code
+                render-qr(qr-codes)
+              }
+            })
           } else {
             [ ]
           }
@@ -88,20 +134,6 @@
       ]
     )
   }
-
-  // Table style
-  set table(
-    stroke: none,
-    fill: (x, y) => {
-      if y == 0 {
-        TABLE_HEADER_COLOR
-      } else if calc.rem(y, 2) == 0 {
-        TABLE_ZEBRA_COLOR_0
-      } else {
-        TABLE_ZEBRA_COLOR_1
-      }
-    },
-  )
 
   // Save our settings needed in other functions
   __set("heading-font", heading-font)
@@ -144,45 +176,88 @@
 #let cv = resume
 
 // Creates a skills section with customizable separator and spacing between skills
-// Output: Python | AWS | Docker | Git | Linux (formatted across page width)
+// Optional annotation argument, adds annotation ex: - all skills are of proffesion..
+// Output: Python | AWS | Docker | Git | Linux - all skills are of professional proficiency or higher
 #let skills-section(
   skills,
-  font: BODY_FONT,
-  size: BODY_SIZE,
-  weight: BODY_WEIGHT,
-  separator: sym.divides, // defaults to | as a separator
-  separator-spacing: 0.5em,
-  line-spacing: 0.8em,  // Space between lines of skills
-  word-spacing: 0.05em,  // Additional spacing between words for better fill
-  justify: true,
+  font: SKILLS_FONT,
+  size: SKILLS_SIZE,
+  weight: SKILLS_WEIGHT,
+  separator: SKILLS_SEPARATOR,
+  separator-spacing: SKILLS_SEPARATOR_SPACING,
+  line-spacing: SKILLS_LINE_SPACING,
+  word-spacing: SKILLS_WORD_SPACING,
+  justify: SKILLS_JUSTIFY,
+  annotation: none,
+  annotation-separator: none,
 ) = {
   // Create the section header
   heading(level: 1)[Skills]
   
   // Create the separator with custom spacing and styling
   let sep = box(
-    baseline: -0.15em,  // Align with text baseline
+    baseline: -0.15em, // Align with text baseline
     [#h(separator-spacing)#separator#h(separator-spacing)]
   )
   
-  // Format skills with better text flow
+  // Format skills with custom text flow
   block(
     spacing: line-spacing,
     text(font: font, size: size, weight: weight)[
       #set par(
-        justify: justify,  // Fill width
-        leading: line-spacing,  // Line height
-        spacing: word-spacing,  // Word spacing
+        justify: justify, // Fill width
+        leading: line-spacing, // Line height
+        spacing: word-spacing, // Word spacing
       )
       #skills.join(sep)
+      #if annotation != none [
+        #annotation-separator#annotation
+      ]
     ]
   )
 }
 
-#let company-heading(name, start: none, end: none, icon: none, body) = {
+#let bullet-list(
+  ..items,
+  font: BULLET_LIST_FONT,
+  size: BULLET_LIST_SIZE,
+  weight: BULLET_LIST_WEIGHT,
+  marker: BULLET_LIST_MARKER,
+  marker-color: BULLET_LIST_MARKER_COLOR,
+  indent: BULLET_LIST_INDENT,
+  line-spacing: BULLET_LIST_LINE_SPACING,
+  body-indent: BULLET_LIST_BODY_INDENT, 
+  word-spacing: BULLET_LIST_WORD_SPACING,
+  wrapped-line-spacing: BULLET_LIST_WRAPPED_LINE_SPACING,
+) = {
+  // Apply text styling
+  set text(
+    font: font,
+    size: size,
+    weight: weight,
+    spacing: word-spacing,
+  )
+
+  set par(
+    leading: wrapped-line-spacing,
+  )
+  
+  // Apply list styling
+  set list(
+    marker: text(fill: marker-color)[#marker],
+    indent: indent,  // Overall list indentation
+    body-indent: body-indent,  // Gap between marker and text
+    spacing: line-spacing,  // Space between different bullets
+  )
+  
+  // Create the list
+  list(..items.pos())
+}
+
+#let company-heading(name, start: none, end: none, icon: none, body, below: COMPANY_BLOCK_BELOW) = {
   let icon_spacing = if icon != none { COMPANY_ICON_SPACING } else { 0em }
   block(
-    below: COMPANY_BLOCK_BELOW,
+    below: below,
     breakable: false,
 
     grid(
@@ -249,6 +324,7 @@
         style: JOB_NAME_STYLE,
         weight: JOB_NAME_WEIGHT,
         size: JOB_NAME_SIZE,
+        fill: black,
         font: __get("heading-font"),
         title
       ),
@@ -285,4 +361,3 @@
 
 // Alias to degree heading
 #let degree-heading = job-heading
-
